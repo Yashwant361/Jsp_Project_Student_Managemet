@@ -43,18 +43,42 @@ const Profile = () => {
   }, [])
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <h1 className="text-2xl font-bold text-center mb-6">Profile</h1>
+    <div className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat p-4 bg-[url('https://images.unsplash.com/photo-1557683316-973673baf926')]">
 
-        <div className="space-y-2 text-lg">
-          <p><strong>Name:</strong> {name}</p>
-          <p><strong>Age:</strong> {age}</p>
-          <p><strong>Email:</strong> {email}</p>
+      <div className="bg-white/90 backdrop-blur-md shadow-xl rounded-2xl p-8 w-full max-w-md text-center">
+
+        {/* Profile Image */}
+        <div className="flex justify-center mb-4">
+          <img
+            src={`https://ui-avatars.com/api/?name=${name}&background=2563eb&color=fff&size=128`}
+            alt="profile"
+            className="w-24 h-24 rounded-full border-4 border-blue-500 shadow-md"
+          />
+
         </div>
+
+        <h1 className="text-2xl font-bold text-gray-800 mb-6">Profile</h1>
+
+        <div className="space-y-3 text-gray-700 text-lg">
+          <p><span className="font-semibold">Name:</span> {name}</p>
+          <p><span className="font-semibold">Age:</span> {age}</p>
+          <p><span className="font-semibold">Email:</span> {email}</p>
+        </div>
+
+        <button
+          onClick={() => {
+            localStorage.removeItem('token');
+            navigate('/login');
+          }}
+          className="mt-6 w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg transition duration-200"
+        >
+          Logout
+        </button>
+
       </div>
     </div>
-  )
+  );
+
 }
 
 export default Profile
