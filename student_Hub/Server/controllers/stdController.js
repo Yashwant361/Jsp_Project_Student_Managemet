@@ -230,9 +230,56 @@ const handleResetPassword = async (req, res) => {
     }
     catch (err) {
         // console.log("ERROR =>", err);
-        return res.status(500).json({ message: 'Internal server error' })
+        return res.status(500).json({ message: 'Internal Server Error' })
     }
 }
+
+const handleStdUpdateEmail = async (req, res) => {
+    try {
+        const { _id } = req.payload;
+
+        const isStd = await STD.findById(_id);
+
+        if (!isStd) {
+            return res.status(401).json({ message: 'Token not valid' });
+        }
+
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).json({ message: "Input field is mandatory" });
+        }
+
+        if (email === isStd.email) {
+            return res.status(400).json({ message: "New email cannot be same as current email" });
+        }
+
+        // verify password
+        const isMatched = await bcrypt.compare(password, isStd.password);
+
+        if (!isMatched) {
+            return res.status(401).json({ message: "Current password is wrong" });
+        }
+
+        // check if email already exists
+        const emailExists = await STD.findOne({ email });
+
+        if (emailExists) {
+            return res.status(409).json({ message: 'Email Already in Use' });
+        }
+
+        // update email
+        isStd.email = email;
+        await isStd.save();
+
+        return res.status(200).json({ message: 'Email Updated Successfully' });
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal Server Error' });
+    }
+};
+
 
 
 // delete account
@@ -247,7 +294,8 @@ module.exports = {
     handleUpdateStdName,
     handleUpdateStdPassword,
     handleForgetPassword,
-    handleResetPassword
+    handleResetPassword,
+    handleStdUpdateEmail
 }
 
 //api to get user details
