@@ -1,5 +1,10 @@
 const express = require('express');
-const { handleStdSignup, handleStdLogin, getStdDetails, handleUpdateStdName, handleUpdateStdPassword,handleForgetPassword,handleResetPassword } = require('../controllers/stdController');
+const {
+    handleStdSignup, handleStdLogin, getStdDetails,
+    handleUpdateStdName, handleUpdateStdPassword,
+    handleForgetPassword, handleResetPassword, handleStdUpdateEmail
+} = require('../controllers/stdController');
+
 const { auth } = require('../auth/auth');
 
 const stdRouter = express.Router();
@@ -21,8 +26,11 @@ stdRouter.patch('/updatename', auth, handleUpdateStdName)
 stdRouter.patch('/updatepassword', auth, handleUpdateStdPassword)
 
 //password Forget and Reset 
-stdRouter.post('/forgetpassword',handleForgetPassword)
-stdRouter.patch('/resetpassword',handleResetPassword)
+stdRouter.post('/forgetpassword', handleForgetPassword)
+stdRouter.patch('/resetpassword', handleResetPassword)
+
+//updated Email
+stdRouter.patch('/updateemail', auth, handleStdUpdateEmail)
 
 //delete account next here
 
