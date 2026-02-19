@@ -167,7 +167,7 @@ const Profile = () => {
 
         </div>
 
-        {/* Update Password Button */}
+        
         <div className="mt-6">
           <button
             onClick={() => setEdit("password")}
@@ -177,7 +177,7 @@ const Profile = () => {
           </button>
         </div>
 
-        {/* Update Email Button */}
+      
         <div className="mt-4">
           <button
             onClick={() => setEdit("email")}
