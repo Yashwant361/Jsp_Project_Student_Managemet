@@ -2,7 +2,7 @@ import React from 'react'
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom'
 import { useUser } from '../context/userContext';
-
+import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -21,20 +21,13 @@ const Navbar = () => {
                 Student Profile
             </h1>
             <div className="flex items-center space-x-6">
-
+                {/* <ThemeToggle /> */}
                 <Link
                     to="/subject"
                     className="text-gray-700 dark:text-gray-200 hover:text-blue-500 transition"
                 >
-                    Subjet
-                </Link>
-
-                {/* <Link
-                    to="/subject"
-                    className="relative hover:text-yellow-400 transition duration-300 after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-[2px] after:bg-yellow-400 after:transition-all after:duration-300 hover:after:w-full"
-                >
                     Subject
-                </Link> */}
+                </Link>
 
                 <Link
                     to="/profile"
