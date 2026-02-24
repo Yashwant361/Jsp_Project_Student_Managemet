@@ -89,3 +89,6 @@ server/
 ├── .env
 ├── package.json
 └── server.js
+
+
+## forget psw in frontend , otp(get , expire ) , 
