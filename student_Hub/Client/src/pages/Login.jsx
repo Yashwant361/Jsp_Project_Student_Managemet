@@ -29,12 +29,12 @@ const Login = () => {
       toast.success(res.data.message);
       navigate('/profile');
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || "Login failed");
     }
   };
 
   return (
-   <div className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat p-4 bg-[url('https://images.unsplash.com/photo-1557683316-973673baf926')]">
+    <div className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat p-4 bg-[url('https://images.unsplash.com/photo-1557683316-973673baf926')]">
       <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-8">
         <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Login Page</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -43,6 +43,7 @@ const Login = () => {
             value={userDetails.email}
             placeholder="Email"
             name="email"
+            required
             onChange={handleFormChange}
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
@@ -50,6 +51,7 @@ const Login = () => {
             type="password"
             value={userDetails.password}
             placeholder="Password"
+            required
             name="password"
             onChange={handleFormChange}
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -61,12 +63,21 @@ const Login = () => {
             Login
           </button>
         </form>
+
+        <div className="text-center mt-6 text-gray-600  ">
+          <div className='flex justify-center gap-x-6'>
+            <Link to="/forget-password" className="text-blue-600 hover:underline">
+              Forget Password
+            </Link>
+          </div>
+        </div>
         <div className="text-center mt-6 text-gray-600">
           Don’t have an account?{" "}
           <Link to="/signup" className="text-blue-600 hover:underline">
             Sign up
           </Link>
         </div>
+
       </div>
     </div>
   );
